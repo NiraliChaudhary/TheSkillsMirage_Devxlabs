@@ -955,7 +955,8 @@ button {
 
 .results-grid {
     display: grid;
-    grid-template-columns: 220px 1fr 340px;
+    /* Expanding the risk score box from 220px to 270px and shrinking the others relatively */
+    grid-template-columns: 270px 1fr 340px;
     gap: 12px;
     align-items: start;
 }
