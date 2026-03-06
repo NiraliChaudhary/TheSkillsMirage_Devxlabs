@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkillsMirage — India Workforce Intelligence</title>
+    <meta name="description"
+        content="Live AI displacement risk scores, job market signals, and personalised reskilling paths for Indian workers across 25+ cities." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+    <!-- ── HEADER ── -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="9" stroke="var(--accent)" stroke-width="1.5" />
+                    <path d="M10 3v14M3 10h14" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" />
+                </svg>
+                <span>SkillsMirage</span>
+            </div>
+            <div class="header-right">
+                <span class="live-chip">
+                    <span class="live-dot"></span>
+                    Live data
+                </span>
+                <nav class="nav">
+                    <a href="#dashboard" class="nav-link">Market</a>
+                    <a href="#worker" class="nav-link">My Risk</a>
+                    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()"
+                        title="Toggle dark/light mode">
+                        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg>
+                        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                        </svg>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── HERO — compact, no diagram ── -->
+    <section class="hero">
+        <div class="container">
+            <p class="eyebrow">India Workforce Intelligence</p>
+            <h1>Know your AI risk.<br />Find your next move.</h1>
+            <p class="hero-sub">Live job market signals from Naukri, LinkedIn India, PLFS &amp; PMKVY data mapped to
+                your personal displacement risk and a free reskilling path.</p>
+            <div class="hero-stats" id="hero-stats">
+                <div class="stat-pill"><span class="stat-n" id="stat-cities">25+</span> cities</div>
+                <div class="stat-pill"><span class="stat-n" id="stat-sectors">15</span> sectors</div>
+                <div class="stat-pill"><span class="stat-n">8</span> open datasets</div>
+                <div class="stat-pill"><span class="stat-n">Free</span> reskilling paths</div>
+            </div>
+            <a href="#worker" class="cta-btn">Check my risk score ↓</a>
+        </div>
+    </section>
+
+
+    <section class="section" id="dashboard">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <h2>Job Market Dashboard</h2>
+                    <p class="section-desc">Hiring signals across India — refreshes hourly.</p>
+                </div>
+                <div class="tab-switcher" role="tablist">
+                    <button class="tab-btn active" id="tab-a-btn" role="tab" aria-selected="true"
+                        onclick="switchTab('a')">Hiring Trends</button>
+                    <button class="tab-btn" id="tab-b-btn" role="tab" aria-selected="false"
+                        onclick="switchTab('b')">Skills</button>
+                    <button class="tab-btn" id="tab-c-btn" role="tab" aria-selected="false" onclick="switchTab('c')">AI
+                        Risk Index</button>
+                </div>
+            </div>
+
+            <!-- TAB A ─ Hiring Trends -->
+            <div class="tab-panel active" id="tab-a" role="tabpanel">
+                <div class="filter-bar">
+                    <select id="city-filter" class="select" onchange="loadHiringTrends()">
+                        <option value="">All cities</option>
+                    </select>
+                    <select id="sector-filter" class="select" onchange="loadHiringTrends()">
+                        <option value="">All sectors</option>
+                    </select>
+                    <div class="range-group" id="range-btns">
+                        <button class="range-btn active" onclick="setRange('7d',this)">7d</button>
+                        <button class="range-btn" onclick="setRange('30d',this)">30d</button>
+                        <button class="range-btn" onclick="setRange('90d',this)">90d</button>
+                        <button class="range-btn" onclick="setRange('1yr',this)">1yr</button>
+                    </div>
+                    <button class="icon-btn" title="Refresh" onclick="loadHiringTrends()" id="refresh-btn">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M23 4v6h-6M1 20v-6h6" />
+                            <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
+                        </svg>
+                        Refresh
+                    </button>
+                </div>
+
+                <div class="insight-bar" id="insight-bar">
+                    <span class="insight-icon">—</span>
+                    <span id="insight-text">Loading market signal…</span>
+                </div>
+
+                <div class="two-col">
+                    <div class="card">
+                        <div class="card-head">
+                            <span class="card-title">Trend <span class="muted" id="timeseries-label"></span></span>
+                        </div>
+                        <div class="chart-wrap">
+                            <canvas id="trend-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-head"><span class="card-title">Top 10 by volume</span></div>
+                        <div id="trends-table-wrapper">
+                            <div class="loader">Loading…</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB B ─ Skills -->
+            <div class="tab-panel" id="tab-b" role="tabpanel">
+                <div class="skills-two-col">
+                    <div class="card">
+                        <div class="card-head skills-head rising-head">
+                            <span>Rising Skills</span><span class="pill" id="rising-count">—</span>
+                        </div>
+                        <div id="rising-skills-list" class="skill-list">
+                            <div class="loader">Loading…</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-head skills-head declining-head">
+                            <span>Declining Skills</span><span class="pill" id="declining-count">—</span>
+                        </div>
+                        <div id="declining-skills-list" class="skill-list">
+                            <div class="loader">Loading…</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card gap-card">
+                    <div class="card-head"><span class="card-title">Skill gap — What government programs train vs. what
+                            market hires</span></div>
+                    <div id="gap-map-grid" class="gap-grid">
+                        <div class="loader">Mapping gaps…</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB C ─ AI Risk Index -->
+            <div class="tab-panel" id="tab-c" role="tabpanel">
+                <div class="filter-bar">
+                    <select id="vuln-city-filter" class="select" onchange="loadVulnerability()">
+                        <option value="">All cities</option>
+                    </select>
+                    <select id="vuln-sector-filter" class="select" onchange="loadVulnerability()">
+                        <option value="">All sectors</option>
+                    </select>
+                    <button class="text-btn" onclick="toggleMethodology()">View methodology ↗</button>
+                </div>
+
+                <!-- Methodology panel -->
+                <div class="method-panel" id="methodology-panel" hidden>
+                    <p class="method-title">How the score is calculated</p>
+                    <div class="method-grid">
+                        <div class="method-row"><span class="method-w">50%</span>
+                            <div><strong>Hiring decline</strong>
+                                <p>30-day job posting change for the role × city pair.</p>
+                            </div>
+                        </div>
+                        <div class="method-row"><span class="method-w">30%</span>
+                            <div><strong>AI tool mentions in JDs</strong>
+                                <p>% of active job descriptions mentioning AI / automation / RPA tools</p>
+                            </div>
+                        </div>
+                        <div class="method-row"><span class="method-w">40%</span>
+                            <div><strong>Role replacement ratio</strong>
+                                <p>WEF Future of Jobs displacement forecast for the role category. Cross-referenced with
+                                    PLFS occupational data.</p>
+                            </div>
+                        </div>
+                        <div class="method-row"><span class="method-w">adj.</span>
+                            <div><strong>Experience bracket</strong>
+                                <p>&lt;2yrs +10, &gt;10yrs −15. Senior roles carry non-automatable coordination buffer.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="legend-row">
+                        <span class="legend-chip critical">70–100 Critical</span>
+                        <span class="legend-chip high">45–69 High</span>
+                        <span class="legend-chip moderate">25–44 Moderate</span>
+                        <span class="legend-chip low">0–24 Low</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-head"><span class="card-title">City risk heatmap</span></div>
+                    <div id="heatmap-grid" class="heatmap-grid">
+                        <div class="loader">Computing scores…</div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top:12px">
+                    <div class="card-head"><span class="card-title">Highest-risk roles</span></div>
+                    <div id="vuln-table-wrapper" class="table-scroll">
+                        <div class="loader">Scoring roles…</div>
+                    </div>
+                </div>
+
+                <div class="example-strip">
+                    Example: <strong>BPO Voice — Pune: 87 Critical</strong> · <strong>Data Entry – Jaipur: 74
+                        High</strong> · <strong>Data Analyst (AI Tools): 18 Low</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section alt-section" id="worker">
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <h2>Your AI Risk Score</h2>
+                    <p class="section-desc">Four inputs. No CV. Results in seconds.</p>
+                </div>
+            </div>
+
+            <div class="worker-card">
+                <!-- Row 1: three quick inputs -->
+                <div class="inputs-row">
+                    <div class="field">
+                        <label class="field-label"><span class="field-num">1</span> Current job title</label>
+                        <input type="text" id="worker-title" class="input"
+                            placeholder="e.g. BPO Voice Executive, Data Entry Operator…" />
+                    </div>
+                    <div class="field">
+                        <label class="field-label"><span class="field-num">2</span> City</label>
+                        <select id="worker-city" class="input select">
+                            <option value="">Select…</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label class="field-label"><span class="field-num">3</span> Years of experience</label>
+                        <input type="number" id="worker-exp" class="input" min="0" max="40" value="3"
+                            placeholder="e.g. 4" />
+                    </div>
+                </div>
+
+                <!-- Row 2: write-up -->
+                <div class="writeup-field">
+                    <label class="field-label">
+                        <span class="field-num">4</span>
+                        Write-up <span class="field-hint">100-200 words · the most important input</span>
+                    </label>
+                    <p class="writeup-desc">What you do day-to-day, what you're good at, and where you want to move.
+                    </p>
+                    <textarea id="worker-writeup" class="textarea" rows="4"
+                        placeholder="I manage 80+ inbound calls daily, handle billing disputes and escalations. I've started learning Excel macros on weekends. I want to move into a data or analytics role…"></textarea>
+                    <span class="word-counter" id="word-count">0 / 200</span>
+                </div>
+
+                <button class="submit-btn" id="analyze-btn" onclick="analyzeWorker()">
+                    Analyse →
+                </button>
+            </div>
+
+            <!-- Results — shown after submission -->
+            <div id="results-section" style="display:none" class="results-wrap">
+                <div class="results-grid">
+
+                    <!-- Risk Card -->
+                    <div class="r-card risk-r-card">
+                        <p class="r-card-label">AI Risk Score</p>
+                        <div class="score-row">
+                            <span class="score-big" id="score-number">—</span>
+                            <span class="score-denom">/100</span>
+                        </div>
+                        <p class="risk-label-text" id="risk-label-display">—</p>
+                        <div class="signals-stack" id="score-signals"></div>
+                        <div class="score-footer">
+                            <span id="score-delta"></span>
+                            <span id="peer-info"></span>
+                        </div>
+                    </div>
+
+                    <!-- Reskilling Path -->
+                    <div class="r-card path-r-card">
+                        <p class="r-card-label">Reskilling Path</p>
+                        <p class="target-role-text" id="target-role"></p>
+                        <div class="week-list" id="path-weeks-list"></div>
+                        <p class="path-footer" id="path-verification"></p>
+                    </div>
+
+                    <!-- Chatbot -->
+                    <div class="r-card chat-r-card" id="chatbot-section">
+                        <p class="r-card-label">AI Assistant <span class="lang-badge">EN · हिं</span></p>
+                        <div class="chat-window" id="chat-window">
+                            <div class="bot-msg">
+                                👋 Namaste! I know your profile and live market data.<br />
+                                Try: <em>"Why is my score high?"</em> or <em>"मुझे कहाँ से शुरू करना चाहिए?"</em>
+                            </div>
+                        </div>
+                        <div class="chat-bar">
+                            <input type="text" id="chat-input" class="chat-input" placeholder="Ask in English or Hindi…"
+                                onkeydown="if(event.key==='Enter')sendChat()" />
+                            <button class="send-btn" onclick="sendChat()">↑</button>
+                        </div>
+                        <div class="quick-row">
+                            <button class="q-btn" onclick="quickAsk('Why is my risk score high?')">Why high?</button>
+                            <button class="q-btn" onclick="quickAsk('Show reskilling paths under 3 months')">Under 3
+                                months</button>
+                            <button class="q-btn" onclick="quickAsk('Is NPTEL certificate recognised?')">NPTEL
+                                valid?</button>
+                            <button class="q-btn hindi" onclick="quickAsk('मुझे कहाँ से शुरू करना चाहिए?')">कहाँ से
+                                शुरू?</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <span class="footer-brand">SkillsMirage</span>
+            <span class="footer-meta">DevxLabs Hackathon 2025 · India's Open Workforce Intelligence</span>
+
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/worker.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
