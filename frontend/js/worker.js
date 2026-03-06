@@ -23,8 +23,8 @@ async function analyzeWorker() {
     const yearsExp = parseInt(document.getElementById("worker-exp").value) || 3;
     const writeup = document.getElementById("worker-writeup").value.trim();
 
-    if (!title || !city) {
-        alert("Please fill in Job Title and City.");
+    if (!title || !city || !writeup) {
+        alert("Please fill in Job Title, City, and Write-up (required for accurate analysis).");
         return;
     }
 

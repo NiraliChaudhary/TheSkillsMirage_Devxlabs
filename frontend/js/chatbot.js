@@ -15,6 +15,15 @@ let chatCachedRisk = {};   // exact risk object the user saw
 let chatCachedPath = {};   // exact path the user saw
 let chatL1Snapshot = {};   // hiring trend for worker's city+sector
 
+// Toggle the floating chatbot overlay
+function toggleChatbot() {
+    const overlay = document.getElementById("chat-overlay");
+    const fab = document.getElementById("chat-fab");
+    overlay.classList.toggle("active");
+    // Change emoji when open
+    fab.querySelector(".chat-fab-emoji").textContent = overlay.classList.contains("active") ? "✕" : "🤖";
+}
+
 // Called by worker.js after analyzeWorker() succeeds
 async function initChatbot(workerProfile, riskData, pathData) {
     chatWorkerProfile = workerProfile;
@@ -55,6 +64,14 @@ async function initChatbot(workerProfile, riskData, pathData) {
       Your reskilling path targets <strong>${targetRole}</strong> (${openings} openings in ${city} right now).<br/><br/>
       Ask me anything in <strong>English</strong> or <strong>Hindi</strong>.
     </div>`;
+
+    // Auto-open the chatbot after analysis
+    const overlay = document.getElementById("chat-overlay");
+    const fab = document.getElementById("chat-fab");
+    if (!overlay.classList.contains("active")) {
+        overlay.classList.add("active");
+        fab.querySelector(".chat-fab-emoji").textContent = "✕";
+    }
 }
 
 async function sendChat() {

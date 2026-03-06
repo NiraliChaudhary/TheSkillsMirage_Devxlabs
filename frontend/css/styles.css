@@ -5,23 +5,21 @@
 
 /* ── Tokens ───────────────────────────────────────────── */
 :root {
-    --bg: #F8F9FA;
+    --bg: #F4F4F5;
     --surface: #FFFFFF;
-    --border: #E4E7EB;
-    --border-dark: #CDD2D9;
+    --border: #E4E4E7;
+    --border-dark: #D4D4D8;
 
-    --text: #111827;
-    --text-2: #4B5563;
-    --text-3: #9CA3AF;
+    --text: #09090B;
+    --text-2: #52525B;
+    --text-3: #A1A1AA;
 
-    --accent: #0D9488;
-    /* teal-600 */
-    --accent-lt: #CCFBF1;
-    /* teal-100 */
-    --accent-dk: #0F766E;
+    --accent: #fb411f;
+    --accent-lt: #FEECE8;
+    --accent-dk: #DE3615;
 
-    --red: #DC2626;
-    --red-lt: #FEE2E2;
+    --red: #E11D48;
+    --red-lt: #FFE4E6;
     --orange: #EA580C;
     --orange-lt: #FFEDD5;
     --amber: #D97706;
@@ -29,12 +27,39 @@
     --green: #16A34A;
     --green-lt: #DCFCE7;
 
-    --radius: 10px;
-    --radius-sm: 6px;
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+    --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.08);
+
+    --header-bg: rgba(244, 244, 245, 0.92);
+    --alt-bg: #FFFFFF;
 
     --font: 'Inter', system-ui, sans-serif;
+}
+
+/* ── Dark Theme (Exactly.ai strict Dark Mode) ── */
+[data-theme="dark"] {
+    --bg: #000000;
+    --surface: #09090B;
+    --border: #27272A;
+    --border-dark: #3F3F46;
+
+    --text: #FFFFFF;
+    --text-2: #A1A1AA;
+    --text-3: #71717A;
+
+    --accent: #fb411f;
+    --accent-lt: #2B1510;
+    --accent-dk: #FF5A3B;
+
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.4);
+
+    --header-bg: rgba(0, 0, 0, 0.92);
+    --alt-bg: #09090B;
 }
 
 /* ── Reset ────────────────────────────────────────────── */
@@ -82,7 +107,7 @@ button {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(248, 249, 250, 0.92);
+    background: var(--header-bg);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
 }
@@ -479,7 +504,7 @@ button {
 
 .data-table td {
     padding: 9px 14px;
-    border-bottom: 1px solid #F3F4F6;
+    border-bottom: 1px solid var(--border);
     color: var(--text-2);
 }
 
@@ -488,7 +513,7 @@ button {
 }
 
 .data-table tr:hover td {
-    background: #F9FAFB;
+    background: var(--alt-bg);
 }
 
 .up {
@@ -555,7 +580,7 @@ button {
 }
 
 .skill-item:hover {
-    background: #F9FAFB;
+    background: var(--alt-bg);
 }
 
 .sk-name {
@@ -929,18 +954,19 @@ button {
 
 .submit-btn {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border-radius: var(--radius-sm);
     background: var(--accent);
-    color: #fff;
-    font-size: 14px;
+    color: #ffffff;
+    font-size: 15px;
     font-weight: 600;
-    transition: background .15s, transform .15s;
+    transition: background .2s, transform .2s, box-shadow .2s;
 }
 
 .submit-btn:hover {
-    background: var(--accent-dk);
-    transform: translateY(-1px);
+    background: var(--text-2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .submit-btn:disabled {
@@ -950,24 +976,25 @@ button {
 
 /* ── Results ────────────────────────────────────────────── */
 .results-wrap {
-    margin-top: 20px;
+    margin-top: 24px;
 }
 
 .results-grid {
     display: grid;
-    /* Expanding the risk score box from 220px to 270px and shrinking the others relatively */
-    grid-template-columns: 270px 1fr 340px;
-    gap: 12px;
-    align-items: start;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    align-items: stretch;
 }
 
 .r-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 18px;
+    padding: 24px;
     box-shadow: var(--shadow);
 }
+
+
 
 .r-card-label {
     font-size: 11px;
@@ -1222,7 +1249,125 @@ button {
 .q-btn.hindi {
     background: var(--accent-lt);
     color: var(--accent-dk);
-    border-color: #99F6E4;
+    border-color: var(--accent-dk);
+}
+
+/* ── Floating Chatbot FAB + Overlay ────────────────────── */
+.chat-fab {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 24px 48px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s;
+    animation: fab-pulse 2s ease-in-out infinite;
+}
+
+.chat-fab:hover {
+    transform: scale(1.08);
+    background: var(--accent-dk);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), 0 32px 64px rgba(0, 0, 0, 0.25);
+}
+
+.chat-fab-emoji {
+    font-size: 28px;
+    line-height: 1;
+    color: #ffffff;
+}
+
+@keyframes fab-pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 24px 48px rgba(0, 0, 0, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), 0 32px 64px rgba(0, 0, 0, 0.25);
+    }
+}
+
+.chat-overlay {
+    position: fixed;
+    bottom: 100px;
+    right: 28px;
+    width: 380px;
+    max-height: 520px;
+    z-index: 9998;
+    display: none;
+    animation: chat-slide-up 0.3s ease;
+}
+
+.chat-overlay.active {
+    display: block;
+}
+
+@keyframes chat-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chat-overlay-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+}
+
+.chat-overlay-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.chat-overlay-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--text-3);
+}
+
+.chat-close-btn {
+    background: none;
+    border: 1px solid var(--border-dark);
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    color: var(--text-3);
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+}
+
+.chat-close-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-lt);
 }
 
 /* ── Data Sources table ─────────────────────────────────── */
@@ -1257,7 +1402,7 @@ button {
 }
 
 .sources-table tr:hover td {
-    background: #F9FAFB;
+    background: var(--alt-bg);
 }
 
 .sources-table td:first-child {
@@ -1406,159 +1551,7 @@ button {
     display: block;
 }
 
-/* ═══════════════════════════════════════════════════════
-   Dark Theme Overrides
-   ═══════════════════════════════════════════════════════ */
-[data-theme="dark"] {
-    --bg: #0F1117;
-    --surface: #1A1D27;
-    --border: #2A2D3A;
-    --border-dark: #3A3D4A;
 
-    --text: #E8E9ED;
-    --text-2: #A0A4B0;
-    --text-3: #6B6F7E;
-
-    --accent: #2DD4BF;
-    --accent-lt: rgba(45, 212, 191, 0.12);
-    --accent-dk: #14B8A6;
-
-    --red-lt: rgba(220, 38, 38, 0.15);
-    --orange-lt: rgba(234, 88, 12, 0.15);
-    --amber-lt: rgba(217, 119, 6, 0.15);
-    --green-lt: rgba(22, 163, 74, 0.15);
-
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* Header glass effect in dark mode */
-[data-theme="dark"] .header {
-    background: rgba(15, 17, 23, 0.92);
-    border-bottom-color: var(--border);
-}
-
-/* Hardcoded bg overrides */
-[data-theme="dark"] .data-table td {
-    border-bottom-color: var(--border);
-}
-
-[data-theme="dark"] .data-table tr:hover td {
-    background: rgba(255, 255, 255, 0.03);
-}
-
-[data-theme="dark"] .skill-item:hover {
-    background: rgba(255, 255, 255, 0.04);
-}
-
-[data-theme="dark"] .hm-cell {
-    border-right-color: rgba(0, 0, 0, 0.3);
-    border-bottom-color: rgba(0, 0, 0, 0.3);
-}
-
-/* Insight bar in dark */
-[data-theme="dark"] .insight-bar {
-    border-color: rgba(45, 212, 191, 0.25);
-}
-
-/* Input fields */
-[data-theme="dark"] .input,
-[data-theme="dark"] .textarea {
-    background-color: #141722;
-    border-color: var(--border-dark);
-    color: var(--text);
-}
-
-/* Select — use individual properties to preserve the arrow SVG */
-[data-theme="dark"] .select {
-    background-color: #141722;
-    border-color: var(--border-dark);
-    color: var(--text);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%236B6F7E'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-}
-
-[data-theme="dark"] .input::placeholder,
-[data-theme="dark"] .textarea::placeholder {
-    color: var(--text-3);
-}
-
-/* Range buttons (7d, 30d, 90d, 1yr) */
-[data-theme="dark"] .range-btn {
-    background-color: #141722;
-    border-color: var(--border-dark);
-    color: var(--text-2);
-}
-
-[data-theme="dark"] .range-btn:hover:not(.active) {
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
-/* Refresh / icon buttons */
-[data-theme="dark"] .icon-btn {
-    background-color: #141722;
-    border-color: var(--border-dark);
-    color: var(--text-2);
-}
-
-[data-theme="dark"] .icon-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
-/* Worker card form area */
-[data-theme="dark"] .worker-card {
-    background-color: var(--surface);
-    border-color: var(--border);
-}
-
-/* Chat messages */
-[data-theme="dark"] .user-msg {
-    background: var(--accent);
-    color: #0F1117;
-}
-
-[data-theme="dark"] .bot-msg {
-    background: var(--border);
-    color: var(--text);
-}
-
-[data-theme="dark"] .chat-input {
-    background: var(--surface);
-    border-color: var(--border-dark);
-    color: var(--text);
-}
-
-/* Quick ask buttons */
-[data-theme="dark"] .q-btn {
-    background: var(--border);
-    color: var(--text-2);
-    border-color: var(--border-dark);
-}
-
-[data-theme="dark"] .q-btn:hover {
-    background: var(--border-dark);
-    color: var(--text);
-}
-
-/* CTA button text stays readable */
-[data-theme="dark"] .cta-btn {
-    color: #0F1117;
-}
-
-/* Submit button */
-[data-theme="dark"] .submit-btn {
-    color: #0F1117;
-}
-
-/* Score card signals */
-[data-theme="dark"] .sig-row {
-    color: var(--text-2);
-}
-
-/* Chart.js canvas — let it auto-adapt via JS */
 
 /* Smooth transition on theme change */
 body,

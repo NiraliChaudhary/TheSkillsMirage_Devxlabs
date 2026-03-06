@@ -311,35 +311,44 @@
                         <p class="path-footer" id="path-verification"></p>
                     </div>
 
-                    <!-- Chatbot -->
-                    <div class="r-card chat-r-card" id="chatbot-section">
-                        <p class="r-card-label">AI Assistant <span class="lang-badge">EN · हिं</span></p>
-                        <div class="chat-window" id="chat-window">
-                            <div class="bot-msg">
-                                👋 Namaste! I know your profile and live market data.<br />
-                                Try: <em>"Why is my score high?"</em> or <em>"मुझे कहाँ से शुरू करना चाहिए?"</em>
-                            </div>
-                        </div>
-                        <div class="chat-bar">
-                            <input type="text" id="chat-input" class="chat-input" placeholder="Ask in English or Hindi…"
-                                onkeydown="if(event.key==='Enter')sendChat()" />
-                            <button class="send-btn" onclick="sendChat()">↑</button>
-                        </div>
-                        <div class="quick-row">
-                            <button class="q-btn" onclick="quickAsk('Why is my risk score high?')">Why high?</button>
-                            <button class="q-btn" onclick="quickAsk('Show reskilling paths under 3 months')">Under 3
-                                months</button>
-                            <button class="q-btn" onclick="quickAsk('Is NPTEL certificate recognised?')">NPTEL
-                                valid?</button>
-                            <button class="q-btn hindi" onclick="quickAsk('मुझे कहाँ से शुरू करना चाहिए?')">कहाँ से
-                                शुरू?</button>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- ── FLOATING CHATBOT ── -->
+    <button class="chat-fab" id="chat-fab" onclick="toggleChatbot()" title="AI Assistant">
+        <span class="chat-fab-emoji">🤖</span>
+    </button>
+
+    <div class="chat-overlay" id="chat-overlay">
+        <div class="chat-overlay-card">
+            <div class="chat-overlay-header">
+                <span class="chat-overlay-title">AI Assistant <span class="lang-badge">EN · हिं</span></span>
+                <button class="chat-close-btn" onclick="toggleChatbot()">✕</button>
+            </div>
+            <div class="chat-window" id="chat-window">
+                <div class="bot-msg">
+                    👋 Namaste! I know your profile and live market data.<br />
+                    Try: <em>"Why is my score high?"</em> or <em>"मुझे कहाँ से शुरू करना चाहिए?"</em>
+                </div>
+            </div>
+            <div class="chat-bar">
+                <input type="text" id="chat-input" class="chat-input" placeholder="Ask in English or Hindi…"
+                    onkeydown="if(event.key==='Enter')sendChat()" />
+                <button class="send-btn" onclick="sendChat()">↑</button>
+            </div>
+            <div class="quick-row">
+                <button class="q-btn" onclick="quickAsk('Why is my risk score high?')">Why high?</button>
+                <button class="q-btn" onclick="quickAsk('Show reskilling paths under 3 months')">Under 3
+                    months</button>
+                <button class="q-btn" onclick="quickAsk('Is NPTEL certificate recognised?')">NPTEL
+                    valid?</button>
+                <button class="q-btn hindi" onclick="quickAsk('मुझे कहाँ से शुरू करना चाहिए?')">कहाँ से
+                    शुरू?</button>
+            </div>
+        </div>
+    </div>
 
     <!-- ── FOOTER ── -->
     <footer class="footer">

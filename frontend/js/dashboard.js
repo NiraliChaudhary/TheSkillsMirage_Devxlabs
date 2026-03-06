@@ -123,12 +123,12 @@ function renderTimeSeries(data) {
             datasets: [{
                 label: "Job postings",
                 data: data.values,
-                borderColor: "#0D9488",
-                backgroundColor: "rgba(13,148,136,0.07)",
+                borderColor: "#fb411f",
+                backgroundColor: "rgba(251, 65, 31, 0.07)",
                 fill: true,
                 tension: 0.4,
                 pointRadius: 3,
-                pointBackgroundColor: "#0D9488",
+                pointBackgroundColor: "#fb411f",
                 borderWidth: 2,
             }]
         },
@@ -138,9 +138,9 @@ function renderTimeSeries(data) {
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: "#111827",
-                    titleColor: "#F9FAFB",
-                    bodyColor: "#0D9488",
+                    backgroundColor: "#09090B",
+                    titleColor: "#FFFFFF",
+                    bodyColor: "#fb411f",
                     callbacks: { label: c => ` ${c.parsed.y.toLocaleString("en-IN")} postings` }
                 }
             },
