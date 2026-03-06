@@ -23,7 +23,7 @@ chatbot_bp = Blueprint("chatbot", __name__)
 
 # ── API Keys ──────────────────────────────────────────────────────
 GROQ_API_KEY   = os.environ.get("GROQ_API_KEY", "")
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+
 
 # ── Helpers ────────────────────────────────────────────────────────
 def _normalize(text: str) -> str:
@@ -94,8 +94,9 @@ Courses:
 
 Rules:
 1. Stay concise (max 150 words).
-2. If msg is in Hindi, respond FULLY in Hindi (Devanagari script).
-3. cite specific numbers from the profile above.
+2. ALWAYS respond in English by default.
+3. Only respond in Hindi (Devanagari script) if the user's message is written in Hindi.
+4. Cite specific numbers from the profile above.
 """
 
 # ── Rule-based fallback ──────────────────────────────────────────
