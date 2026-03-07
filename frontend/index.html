@@ -20,17 +20,18 @@
     <header class="header">
         <div class="container header-inner">
             <div class="logo">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <circle cx="10" cy="10" r="9" stroke="var(--accent)" stroke-width="1.5" />
-                    <path d="M10 3v14M3 10h14" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" />
+                <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 24L12 8L20 24" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="square" />
+                    <path d="M12 24L20 8L28 24" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="square"
+                        opacity="0.3" />
                 </svg>
-                <span>SkillsMirage</span>
+                <!-- <span>THE SKILLS MIRAGE</span> -->
             </div>
             <div class="header-right">
-                <span class="live-chip">
+                <a href="live-data.html" class="live-chip" style="text-decoration:none;">
                     <span class="live-dot"></span>
                     Live data
-                </span>
+                </a>
                 <nav class="nav">
                     <a href="#dashboard" class="nav-link">Market</a>
                     <a href="#worker" class="nav-link">My Risk</a>
@@ -61,10 +62,10 @@
     <!-- ── HERO — compact, no diagram ── -->
     <section class="hero">
         <div class="container">
-            <p class="eyebrow">India Workforce Intelligence</p>
+            <p class="eyebrow">The Skills Mirage</p>
             <h1>Know your AI risk.<br />Find your next move.</h1>
-            <p class="hero-sub">Live job market signals from Naukri, LinkedIn India, PLFS &amp; PMKVY data mapped to
-                your personal displacement risk and a free reskilling path.</p>
+            <p class="hero-sub">Data-driven insights to help you understand AI risk and prepare for the future of work.
+            </p>
             <div class="hero-stats" id="hero-stats">
                 <div class="stat-pill"><span class="stat-n" id="stat-cities">25+</span> cities</div>
                 <div class="stat-pill"><span class="stat-n" id="stat-sectors">15</span> sectors</div>
@@ -219,16 +220,16 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-head"><span class="card-title">City risk heatmap</span></div>
-                    <div id="heatmap-grid" class="heatmap-grid">
-                        <div class="loader">Computing scores…</div>
+                    <div class="card-head"><span class="card-title">Highest-risk roles</span></div>
+                    <div id="vuln-table-wrapper" class="table-scroll">
+                        <div class="loader">Scoring roles…</div>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top:12px">
-                    <div class="card-head"><span class="card-title">Highest-risk roles</span></div>
-                    <div id="vuln-table-wrapper" class="table-scroll">
-                        <div class="loader">Scoring roles…</div>
+                    <div class="card-head"><span class="card-title">City risk heatmap</span></div>
+                    <div id="heatmap-grid" class="heatmap-grid">
+                        <div class="loader">Computing scores…</div>
                     </div>
                 </div>
             </div>
@@ -350,14 +351,14 @@
         </div>
     </div>
 
-    <!-- ── FOOTER ── -->
+    <!-- ── FOOTER ──
     <footer class="footer">
         <div class="container footer-inner">
-            <span class="footer-brand">SkillsMirage</span>
+            <span class="footer-brand">THE SKILLS MIRAGE</span>
             <span class="footer-meta">DevxLabs Hackathon 2025 · India's Open Workforce Intelligence</span>
 
         </div>
-    </footer>
+    </footer> -->
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="js/api.js"></script>

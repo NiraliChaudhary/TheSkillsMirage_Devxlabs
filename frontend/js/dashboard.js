@@ -123,12 +123,12 @@ function renderTimeSeries(data) {
             datasets: [{
                 label: "Job postings",
                 data: data.values,
-                borderColor: "#fb411f",
-                backgroundColor: "rgba(251, 65, 31, 0.07)",
+                borderColor: "#669bbc",
+                backgroundColor: "rgba(102, 155, 188, 0.08)",
                 fill: true,
                 tension: 0.4,
                 pointRadius: 3,
-                pointBackgroundColor: "#fb411f",
+                pointBackgroundColor: "#669bbc",
                 borderWidth: 2,
             }]
         },
@@ -140,7 +140,7 @@ function renderTimeSeries(data) {
                 tooltip: {
                     backgroundColor: "#09090B",
                     titleColor: "#FFFFFF",
-                    bodyColor: "#fb411f",
+                    bodyColor: "#669bbc",
                     callbacks: { label: c => ` ${c.parsed.y.toLocaleString("en-IN")} postings` }
                 }
             },
@@ -209,12 +209,12 @@ function renderGapMap(gapMap) {
     <div class="gap-cell">
       <div class="gap-prog">
         <span>${g.program}</span>
-        <span style="color:var(--orange);font-size:11px">Gap ${g.gap_score}/100</span>
+        <span class="gap-score-badge">Gap ${g.gap_score}/100</span>
       </div>
       <div class="gap-score-bar"><div class="gap-score-fill" style="width:${g.gap_score}%"></div></div>
-      <div class="gap-label">Trains for:</div>
-      <div class="gap-tags">${g.trains_for.map(t => `<span class="gap-tag trains">${t}</span>`).join("")}</div>
-      <div class="gap-label">Market needs:</div>
+      <div class="gap-label" style="margin-top:0;">OUTDATED FOCUS</div>
+      <div class="gap-tags" style="margin-bottom:12px;">${g.trains_for.map(t => `<span class="gap-tag trains">${t}</span>`).join("")}</div>
+      <div class="gap-label">MARKET DEMAND (MISSING)</div>
       <div class="gap-tags">${g.market_needs.map(t => `<span class="gap-tag needs">${t}</span>`).join("")}</div>
     </div>`).join("");
 }
@@ -239,10 +239,10 @@ async function loadVulnerability() {
 function renderHeatmap(heatmap) {
     document.getElementById("heatmap-grid").innerHTML = heatmap.map(h => {
         let bg;
-        if (h.avg_score >= 70) bg = "#DC2626";
-        else if (h.avg_score >= 45) bg = "#EA580C";
-        else if (h.avg_score >= 25) bg = "#D97706";
-        else bg = "#16A34A";
+        if (h.avg_score >= 70) bg = "var(--red)";
+        else if (h.avg_score >= 45) bg = "var(--orange)";
+        else if (h.avg_score >= 25) bg = "var(--amber)";
+        else bg = "var(--green)";
 
         return `<div class="hm-cell" style="background:${bg}"
       title="${h.city} avg: ${h.avg_score} · Highest risk: ${h.highest_risk_sector}">
@@ -257,9 +257,9 @@ function renderVulnTable(data) {
     const wrap = document.getElementById("vuln-table-wrapper");
     if (!data.length) { wrap.innerHTML = `<div class="loader">No data</div>`; return; }
 
-    const scoreColor = s => s >= 70 ? "var(--red)" : s >= 45 ? "var(--orange)" : s >= 25 ? "var(--amber)" : "var(--green)";
+    const scoreColor = s => s >= 70 ? "var(--red-dk)" : s >= 45 ? "var(--orange-dk)" : s >= 25 ? "var(--amber)" : "var(--green)";
     const trendArrow = t => ({ rising: "↑", falling: "↓", stable: "→" })[t] || "—";
-    const trendColor = t => ({ rising: "var(--red)", falling: "var(--green)", stable: "var(--text-3)" })[t];
+    const trendColor = t => ({ rising: "var(--red-dk)", falling: "var(--green)", stable: "var(--text-3)" })[t];
 
     const rows = data.map(d => `<tr>
     <td>${d.city}</td>

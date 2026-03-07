@@ -77,8 +77,8 @@ function renderRiskScore(risk) {
     }, 28);
 
     const color =
-        target >= 70 ? "var(--red)" :
-            target >= 45 ? "var(--orange)" :
+        target >= 70 ? "var(--red-dk)" :
+            target >= 45 ? "var(--orange-dk)" :
                 target >= 25 ? "var(--amber)" : "var(--green)";
 
     scoreEl.style.color = color;
@@ -98,7 +98,7 @@ function renderRiskScore(risk) {
 
     const d = risk.score_delta_30d;
     deltaEl.textContent = `${d >= 0 ? "↑" : "↓"} ${Math.abs(d)} vs 30 days ago`;
-    deltaEl.style.color = d >= 0 ? "var(--red)" : "var(--green)";
+    deltaEl.style.color = d >= 0 ? "var(--red-dk)" : "var(--green)";
 
     peerEl.textContent = `Top ${risk.peer_percentile}% at-risk in ${risk.sector}`;
 }
