@@ -12,21 +12,13 @@ Data sources (all open / scrapeable):
   SWAYAM Courses         → swayam.gov.in (scrapeable)  (2,000+ free courses, 56M+ enrollments)
   WEF Future of Jobs     → weforum.org — free PDF      (India displacement forecasts by role category)
 
-WEF Displacement Risk:
-  Base ratios are from the WEF Future of Jobs Report 2024 (India chapter).
-  They are DYNAMICALLY adjusted by:
-    1. Quarterly AI adoption velocity per sector
-    2. City tier (metro vs tier-2 vs tier-3)
-    3. Hourly jitter for live demo feel
-
-In production: replace `fetch_*` functions with live scrapers against the above sources.
 """
 
 import random
 import math
 from datetime import datetime, timedelta
 
-# ── Seeding for deterministic-yet-fresh data ───────────────────────────────────
+# ── Seeding for deterministic-yet-fresh data 
 def _seed():
     now = datetime.utcnow()
     return now.year * 100000 + now.month * 1000 + now.day * 10 + now.hour
@@ -47,7 +39,7 @@ DATA_SOURCES = [
     {"name": "WEF Future of Jobs",  "contains": "India displacement forecasts by role category",            "url": "https://weforum.org"},
 ]
 
-# ── WEF Displacement Risk (Dynamic) ────────────────────────────────────────────
+# ── WEF Displacement Risk (Dynamic) 
 # Base ratios from WEF Future of Jobs Report 2024 (India chapter).
 # These are the 2024 baselines; the compute function adjusts them dynamically.
 _WEF_BASE_RISK = {
@@ -94,19 +86,6 @@ TIER2_CITIES = {"Ahmedabad", "Jaipur", "Lucknow", "Indore", "Nagpur", "Coimbator
 # Everything else is tier-3
 
 def get_wef_displacement_risk(sector: str, city: str = None) -> float:
-    """
-    Dynamic WEF displacement risk that evolves over time.
-
-    Adjustments applied to the 2024 baseline:
-      1. TEMPORAL — risk grows each quarter based on AI adoption velocity
-         for the sector (some sectors adopt AI faster than others).
-      2. CITY TIER — metros see ~15% faster automation adoption than tier-2,
-         and ~25% faster than tier-3 (infrastructure, company density).
-      3. HOURLY JITTER — small ±1.5% variation seeded to current hour
-         so the number visibly "lives" in demos.
-
-    Returns a float between 0.0 and 1.0.
-    """
     base = _WEF_BASE_RISK.get(sector, 0.50)
     velocity = _AI_ADOPTION_VELOCITY.get(sector, 0.01)
 

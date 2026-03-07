@@ -4,9 +4,6 @@ TheSkillsMirage AI Chatbot — Groq (Llama 3.3 70B)
 Uses Groq for lightning-fast natural-language conversation,
 grounded in the worker's EXACT computed data + live Layer 1 market signals.
 
-Fallback order: Groq → Gemini → Rule-based
-
-Get a free key → https://console.groq.com/keys
 """
 
 import os
@@ -16,7 +13,6 @@ from data.job_market_data import fetch_hiring_trends, CITIES
 from datetime import datetime
 
 # LLM Clients
-import google.generativeai as genai
 from groq import Groq
 
 chatbot_bp = Blueprint("chatbot", __name__)
@@ -149,21 +145,6 @@ def chat():
             })
         except Exception as e:
             print(f"[Groq Error] {e}")
-
-    # ── Try GEMINI second ───────────────────────────────────────
-    if GEMINI_API_KEY:
-        try:
-            genai.configure(api_key=GEMINI_API_KEY)
-            model = genai.GenerativeModel("gemini-2.0-flash")
-            full_input = f"[SYSTEM]\n{system_prompt}\n\n[USER]\n{message}"
-            response = model.generate_content(full_input)
-            return jsonify({
-                "response": response.text.strip(),
-                "model": "gemini-2.0-flash",
-                "timestamp": datetime.utcnow().isoformat() + "Z"
-            })
-        except Exception as e:
-            print(f"[Gemini Error] {e}")
 
     # ── Fallback to Rule-based ─────────────────────────────────
     return jsonify({
