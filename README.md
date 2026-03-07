@@ -48,6 +48,8 @@ set GROQ_API_KEY=...key... && python app.py
 
 ## 🏗️ Three-Layer Intelligence Architecture
 
+*Note: For a detailed visual breakdown, see our [System Architecture Diagram](architecture_diagram.md).*
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │  LAYER 1 — Market Dashboard (The "Macro")                       │
@@ -133,7 +135,7 @@ Data Entry in Delhi:           0.98  ← near-maximum
 | No market data | Layer 1 shows live hiring trends across 25+ Indian cities |
 | English only | Bilingual chatbot (EN + Hindi) powered by Llama 3.3 70B |
 | Paid courses | All reskilling paths use **free** courses (NPTEL, SWAYAM, PMKVY) |
-| Standard UI | **Exactly.ai** premium aesthetic (Minimalist, Dark/Light mode, `#fb411f` accent) |
+| Standard UI | **Exactly.ai** premium aesthetic (Minimalist, Dark/Light mode, Steel Blue `#669bbc` accent) |
 
 ---
 
@@ -157,6 +159,7 @@ TheSkillsMirage/
 │       └── meta.py               ← Data sources metadata API
 └── frontend/
     ├── index.html                ← Single-page app (dark/light theme)
+    ├── live-data.html            ← Simulated real-time scraping & AI inference console
     ├── css/styles.css            ← Minimal design system with theme toggle
     └── js/
         ├── api.js                ← API client (all endpoints)
