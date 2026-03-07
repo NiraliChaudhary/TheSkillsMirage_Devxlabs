@@ -57,11 +57,12 @@ python app.py      # → runs on http://localhost:5000
 │  • Output: AI Risk Score (0-100) + personalised reskilling path  │
 │  • Risk score is grounded in Layer 1 live signals                │
 ├─────────────────────────────────────────────────────────────────┤
-│  LAYER 3 — Bilingual AI Chatbot (The "Guide")                   │
-│  • Powered by Groq (Llama 3.3 70B) │
-│  • Every answer is grounded in YOUR exact score + live L1 data   │
-│  • Seamlessly handles English and Hindi (हिन्दी)                  │
-│  • Not generic advice — cites your specific signals & path       │
+│  LAYER 3 — Floating AI Assistant (The "Guide")                  │
+│  • Floating premium 🤖 button with smart overlay                 │
+│  • Powered by Groq (Llama 3.3 70B)                              │
+│  • Grounded in YOUR exact score + live L1 market data           │
+│  • Seamlessly handles English (default) and Hindi (हिन्दी)       │
+│  • Auto-opens after analysis to guide your first steps          │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -75,10 +76,10 @@ The score is **not a static number**. It's a dynamic computation that changes ba
 |---|---|---|
 | **Hiring decline** | 50% | 30-day job posting change for role × city (Naukri + LinkedIn) |
 | **AI tool mentions in JDs** | 30% | % of job descriptions referencing AI/automation tools |
-| **WEF automation forecast** | 40% | Role replacement ratio from WEF Future of Jobs Report |
+| **WEF automation forecast** | 40% | Role replacement ratio (WEF 2024). IT/Software base fixed at 38% |
 | **Experience bracket** | adj. | <2yrs: +10 (junior = more automatable), >10yrs: −15 (management buffer) |
-| **NLP skill extraction** | adj. | Rising skills found: −8 each. Declining skills: +5 each |
-| **Aspiration signal** | adj. | Write-up mentions intent to upskill: −10 points |
+| **NLP skill extraction** | adj. | High-trend: −8 each. Penalty (+10) applied *only* if zero high-trend skills found |
+| **Aspiration signal** | adj. | Compulsory write-up: mentions intent to upskill/pivot: −10 points |
 
 ### Dynamic WEF Risk Model
 
@@ -86,15 +87,17 @@ Unlike static lookup tables, our WEF displacement risk **evolves over time**:
 
 - **Temporal growth**: Risk increases each quarter based on sector-specific AI adoption velocity
   - Data Entry grows at +2.5%/quarter (RPA + OCR adoption is very high)
-  - IT/Software *decreases* at −0.5%/quarter (AI creates IT jobs)
-- **City tier**: Metros adopt AI ~3pp faster than tier-2 cities
+  - IT/Software now grows at +1.2%/quarter (AI coding tools impacting junior roles)
+- **City context (Flipped)**: 
+  - Metros (−3% risk): More job openings = higher ability to pivot = lower individual risk
+  - Tier-3 (+4% risk): Fewest job openings = highest personal risk if automation hits
 - **Live jitter**: ±1.5% hourly variation so the number visibly "lives" in demos
 
 **Example outputs (March 2026)**:
 ```
 BPO Voice in Mumbai (metro):   0.91  ← critical
-BPO Voice in Dhanbad (tier-3): 0.87  ← slightly lower
-IT Software in Bengaluru:      0.13  ← very low
+BPO Voice in Dhanbad (tier-3): 0.95  ← higher due to fewer job options
+IT Software in Bengaluru:      0.45  ← realistic (was 0.13, now higher for juniors)
 Data Entry in Delhi:           0.98  ← near-maximum
 ```
 
@@ -125,6 +128,7 @@ Data Entry in Delhi:           0.98  ← near-maximum
 | No market data | Layer 1 shows live hiring trends across 25+ Indian cities |
 | English only | Bilingual chatbot (EN + Hindi) powered by Llama 3.3 70B |
 | Paid courses | All reskilling paths use **free** courses (NPTEL, SWAYAM, PMKVY) |
+| Standard UI | **Exactly.ai** premium aesthetic (Minimalist, Dark/Light mode, `#fb411f` accent) |
 
 ---
 
