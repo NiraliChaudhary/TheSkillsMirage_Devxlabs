@@ -21,19 +21,24 @@ There are two sides to this crisis, and **nothing connects them**:
 
 ---
 
-## 🚀 Quick Start
+**Double-click `START.bat`** — it reads your `.env` file, installs dependencies, exports API keys, and opens everything.
 
-**Double-click `START.bat`** — it sets API keys, installs dependencies, starts the Flask backend, and opens the frontend automatically.
-
-Or manually:
+### 📝 Configuration (First step)
+Create a `.env` file in the root folder with your key:
 ```bash
-# 1. Start backend (set your Groq API key for the AI chatbot)
+GROQ_API_KEY=your_key_here
+```
+
+
+# 1. Start backend
 cd backend
 pip install -r requirements.txt
 
-# Windows PowerShell:
-$env:GROQ_API_KEY="your_groq_key_here"
-python app.py      # → runs on http://localhost:5000
+# Windows PowerShell (Note the semicolon):
+$env:GROQ_API_KEY="...key..."; python app.py
+
+# Or Command Prompt (CMD):
+set GROQ_API_KEY=...key... && python app.py
 
 # 2. Open frontend
 # Open frontend/index.html in your browser
@@ -140,7 +145,7 @@ TheSkillsMirage/
 ├── README.md
 ├── backend/
 │   ├── app.py                    ← Flask entry point (port 5000)
-│   ├── requirements.txt          ← flask, flask-cors, google-generativeai, groq
+│   ├── requirements.txt          ← flask, flask-cors, groq
 │   ├── data/
 │   │   └── job_market_data.py    ← Live data engine (dynamic WEF model, 25+ cities, 15 sectors)
 │   └── routes/
@@ -148,7 +153,7 @@ TheSkillsMirage/
 │       ├── skills_intelligence.py← Layer 1 Tab B: Skills demand API
 │       ├── ai_vulnerability.py   ← Layer 1 Tab C: AI Vulnerability Index API
 │       ├── worker_engine.py      ← Layer 2: Risk score + reskilling path API
-│       ├── chatbot.py            ← Layer 3: Groq/Gemini bilingual chatbot API
+│       ├── chatbot.py            ← Layer 3: Groq bilingual chatbot API
 │       └── meta.py               ← Data sources metadata API
 └── frontend/
     ├── index.html                ← Single-page app (dark/light theme)
@@ -228,7 +233,7 @@ This means every response is **grounded in real data**, not hallucinated.
 | Layer | Technology |
 |---|---|
 | **Backend** | Python 3, Flask, Flask-CORS |
-| **AI/LLM** | Groq (Llama 3.3 70B), Google Gemini 2.0 Flash |
+| **AI/LLM** | Groq (Llama 3.3 70B) |
 | **Frontend** | Vanilla HTML5, CSS3, JavaScript |
 | **Charts** | Chart.js 4.4 |
 | **NLP** | Custom keyword extraction (no external NLP library needed) |
